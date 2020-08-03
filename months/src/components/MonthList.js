@@ -14,12 +14,16 @@ function MonthList({ users, months, monthFiltered }) {
 }
 
 function mapStateToProps(state) {
-  const months = state.users.map((user) => user.dob[5] + user.dob[6] );
-  console.log(months)
+  const months = state.users.map((user) => user.dob[5] + user.dob[6]);
+
+  console.log(months);
   return {
     users: state.users,
-    monthFiltered: months.filter((a, b) => +a === +b).length,
-  };
+    monthFiltered: months.reduce((acc, el) => {
+      acc[el] = (acc[el] || 0) + 1;
+      return acc;
+    },[])
+  }
 }
 
 export default connect(mapStateToProps)(MonthList);
