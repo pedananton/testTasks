@@ -10,24 +10,23 @@ const useStyles = makeStyles({
   },
 });
 
-function MonthItem({ month }) {
+function MonthItem({ month, monthFiltered }) {
   const classes = useStyles();
-  function handleBoxToggle(monthFiltered) {
-    //console.log("MonthItem-mouse-over", monthFiltered);
-    return {
-      month: monthFiltered,
-    };
-  }
+  const handleBoxToggle = () => {
+    console.log("MonthItem-mouse-over", monthFiltered);
+  };
   return (
     <div onMouseEnter={handleBoxToggle} className={classes.root}>
       <Grid container justify="center">
         <Grid item>
-          <Tooltip title="Add" placement="top-end">
+          <Tooltip
+            //title={monthTarget}
+            placement="top-end"
+          >
             <Button>{month}</Button>
           </Tooltip>
         </Grid>
       </Grid>
-     
     </div>
   );
 }
