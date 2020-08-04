@@ -10,7 +10,7 @@ function MonthList({ months, monthsList }) {
         <MonthItem
           month={month}
           key={Date.now()}
-          log={console.log("MonthList-render", months)}
+          //log={console.log("MonthList-render", months)}
         />
       ))}
     </div>
@@ -19,15 +19,18 @@ function MonthList({ months, monthsList }) {
 
 function mapStateToProps(state) {
   const months = state.users.map(
-    (user) => user.dob[5].replace(/^0+/, "") + user.dob[6]
+    //(user) => user.dob[5].replace(/^0+/, "") + user.dob[6]
+    (user) => new Date(user.dob).toLocaleString("default", { month: "long" })
   );
-  const monthsList = Array.from(new Set(months))
+  console.log("MonthList-mapStateToProps", months);
+
+  const monthsList = Array.from(new Set(months));
   const monthFiltered = months.reduce((acc, el) => {
     acc[el] = (acc[el] || 0) + 1;
     return acc;
   }, []);
 
-  console.log("MonthList-mapStateToProps", monthFiltered);
+  //console.log("MonthList-mapStateToProps", monthFiltered);
   return {
     users: state.users,
     months,
