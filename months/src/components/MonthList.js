@@ -9,7 +9,7 @@ function MonthList({ months, monthsList }) {
       {monthsList.map((month) => (
         <MonthItem
           month={month}
-          key={Date.now()}
+          key={month.id}
           //log={console.log("MonthList-render", months)}
         />
       ))}
