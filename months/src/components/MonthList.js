@@ -19,9 +19,8 @@ function MonthList({ months, monthsList, monthFiltered }) {
 }
 
 function mapStateToProps(state) {
-  const months = state.users.map(
-    //(user) => user.dob[5].replace(/^0+/, "") + user.dob[6]
-    (user) => new Date(user.dob).toLocaleString("default", { month: "long" })
+  const months = state.users.map((user) =>
+    new Date(user.dob).toLocaleString("default", { month: "long" })
   );
 
   const monthsList = Array.from(new Set(months));
@@ -30,7 +29,6 @@ function mapStateToProps(state) {
     return acc;
   }, []);
 
-  console.log("MonthList-mapStateToProps", monthFiltered);
   return {
     users: state.users,
     months,
