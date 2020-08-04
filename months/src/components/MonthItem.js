@@ -1,7 +1,7 @@
 import React from "react";
 
-function MonthItem({ user }) {
-  return <div>{user}</div>;
+function MonthItem({ month }) {
+  return <div>{month}</div>;
 }
 
 export default MonthItem;
