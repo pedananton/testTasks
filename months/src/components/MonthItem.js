@@ -10,13 +10,22 @@ const useStyles = makeStyles({
   },
 });
 
-function MonthItem({ month, monthFiltered }) {
+function MonthItem({ user, users }) {
   const classes = useStyles();
+
+  const months = users.map((user) =>
+    new Date(user.dob).toLocaleString("default", { month: "long" })
+  );
+
+  const monthsList = Array.from(new Set(months));
+
+  const month = new Date(user.dob).toLocaleString("default", { month: "long" });
+
   return (
     <div className={classes.root}>
       <Grid container justify="center">
         <Grid item>
-          <Tooltip title={monthFiltered} placement="top-end">
+          <Tooltip title="{users}" placement="top-end">
             <Button>{month}</Button>
           </Tooltip>
         </Grid>

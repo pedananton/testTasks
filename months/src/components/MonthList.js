@@ -2,38 +2,22 @@ import React from "react";
 import MonthItem from "./MonthItem";
 import { connect } from "react-redux";
 
-function MonthList({ months, monthsList, monthFiltered }) {
-  //debugger
+function MonthList({ users }) {
   return (
     <div>
-      {monthsList.map((month) => (
-        <MonthItem
-          month={month}
-          monthFiltered={monthFiltered}
-          key={month.id}
-          //log={console.log("MonthList-render", monthFiltered)}
-        />
+      {users.map((user) => (
+        <MonthItem user={user} key={user.id} users={users} />
       ))}
     </div>
   );
 }
 
 function mapStateToProps(state) {
-  const months = state.users.map((user) =>
-    new Date(user.dob).toLocaleString("default", { month: "long" })
-  );
-
-  const monthsList = Array.from(new Set(months));
-  const monthFiltered = months.reduce((acc, el) => {
-    acc[el] = (acc[el] || 0) + 1;
-    return acc;
-  }, []);
+  const user = state.users.find((user) => user.id);
 
   return {
     users: state.users,
-    months,
-    monthFiltered,
-    monthsList,
+    user,
   };
 }
 
