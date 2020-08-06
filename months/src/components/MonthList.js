@@ -1,23 +1,33 @@
 import React from "react";
-import MonthItem from "./MonthItem";
 import { connect } from "react-redux";
+import { Grid, Tooltip, Button } from "@material-ui/core";
 
-function MonthList({ users }) {
+function MonthList({ users, months, month }) {
+  const monthsCounted = months.reduce((acc, el) => {
+    acc[el] = (acc[el] || 0) + 1;
+    return acc;
+  }, []);
+
+  const monthsNamed = new Date(month).toLocaleString("default", {
+    month: "long",
+  });
+
   return (
     <div>
-      {users.map((user) => (
-        <MonthItem user={user} key={user.id} users={users} />
-      ))}
+      <Grid container justify="center">
+        <Grid item>
+          <Tooltip title={monthsCounted} placement="top-end">
+            <Button>{monthsNamed}</Button>
+          </Tooltip>
+        </Grid>
+      </Grid>
     </div>
   );
 }
 
 function mapStateToProps(state) {
-  const user = state.users.find((user) => user.id);
-
   return {
     users: state.users,
-    user,
   };
 }
 
