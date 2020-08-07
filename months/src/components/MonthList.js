@@ -15,13 +15,15 @@ function MonthList({ users, months, month, user }) {
   });
 
   let getStyles =
-    monthsCounted[month] > 0 && monthsCounted[month] < 2
-      ? "gree"
-      : monthsCounted[month] > 3 && monthsCounted[month] < 6
+    monthsCounted[month] > 0 && monthsCounted[month] <= 2
+      ? ""
+      : monthsCounted[month] >= 3 && monthsCounted[month] <= 6
       ? "primary"
-      : monthsCounted[month] > 7 && monthsCounted[month] < 10
+      : monthsCounted[month] >= 7 && monthsCounted[month] <= 10
       ? "green"
-      : "secondary";
+      : monthsCounted[month] >= 11
+      ? "Secondary"
+      : "default";
 
   return (
     <div>
