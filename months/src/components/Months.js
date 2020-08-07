@@ -12,7 +12,7 @@ function Months({ getMonths, monthsList, user, months }) {
     <>
       <div>
         {monthsList.map((month) => (
-          <MonthList month={month} key={user.id} months={months} />
+          <MonthList month={month} key={user.id} months={months} user={user} />
         ))}
       </div>
     </>
@@ -22,7 +22,9 @@ function Months({ getMonths, monthsList, user, months }) {
 function mapStateToProps(state) {
   const user = state.users.find((user) => user.id);
 
-  const months = state.users.map((user) => user.dob[5] + user.dob[6]);
+  const months = state.users.map(
+    (user) => user.dob[5].replace(/^0+/, "") + user.dob[6]
+  );
 
   const monthsList = Array.from(new Set(months));
 
