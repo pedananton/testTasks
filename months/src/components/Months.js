@@ -12,7 +12,7 @@ function Months({ getMonths, monthsList, user, months }) {
     <>
       <div>
         {monthsList.map((month) => (
-          <MonthList month={month} key={user.id} months={months} user={user} />
+          <MonthList month={month} key={Math.random()} months={months} user={user} />
         ))}
       </div>
     </>
